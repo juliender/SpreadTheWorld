@@ -1,3 +1,5 @@
+@(authenticated:Boolean)
+
 <!DOCTYPE html>
 <head>
     <!--copyright 2013 LeadPages-->  
@@ -37,7 +39,7 @@
       </div>
       <!--bottom button -->
       <div class="bottom">
-        <a href="/authenticate/facebook" class="button">Facebook</a>
+          @if(authenticated){Merci!}else{<a href="/authenticate/facebook" class="button">Facebook</a>}
       </div>
     </div>
   </div>

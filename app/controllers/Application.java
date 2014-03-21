@@ -9,6 +9,9 @@ import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
+import scala.Option;
+import scala.util.Either;
+import securesocial.core.Authenticator;
 import views.html.index;
 import views.html.post;
 
@@ -18,7 +21,17 @@ import java.security.NoSuchAlgorithmException;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render());
+        Either<Error, Option<Authenticator>> authenticator= Authenticator.find(ctx().request().cookie(Authenticator.cookieName()).value());
+        if(authenticator.isRight()){
+            Option<Authenticator> auth = authenticator.right().get();
+            if(auth.isDefined()){
+                if(auth.get().identityId().providerId().equals("facebook")){
+                    return ok(index.render(true));
+                }
+            }
+        }
+
+        return ok(index.render(false));
     }
 
     public static Result post() {
