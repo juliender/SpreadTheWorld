@@ -1,17 +1,15 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
-
-import views.html.*;
-
-import models.*;
-
-import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.FacebookType;
+import models.IdentityId;
+import play.Logger;
 import play.data.DynamicForm;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.index;
+import views.html.post;
 
 public class Application extends Controller {
 
