@@ -1,11 +1,17 @@
 <form method="POST">
-    <input type="textarea" name="message"/>
-    <input type="text" name="link"/>
-    <input type="text" name="picture"/>
+    pass <input type="password" name="pass"/><br>
+
+    message <input type="textarea" name="message" style="resize:both;"/><br>
+
+    link <input type="text" name="link"/><br>
+
+    picture <input type="text" name="picture"/><br>
+
+    <button>submit</button>
 </form>
 
 posting accounts :
-
+<br>
 @for(identityId <- models.IdentityId.findAll()){
     @identityId.providerId: @identityId.userId  <br>
 }
