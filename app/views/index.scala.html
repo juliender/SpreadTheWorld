@@ -1,7 +1,49 @@
-@(message: String)
-
-@main("Welcome to Play") {
-
-    @play20.welcome(message, style = "Java")
-
-}
+<!DOCTYPE html>
+<head>
+    <!--copyright 2013 LeadPages-->  
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width">
+    <!-- HTML5 Shim -->
+    <script src="assets/javascripts/html5shiv.js"></script>
+    <!-- Moderizr -->
+    <script src="assets/javascripts/modernizer.js"></script>
+    <!-- Styles -->
+    <link href="assets/stylesheets/style.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' rel='stylesheet' type='text/css'>
+    <!-- these tags will be overridden -->
+    <!--
+      <title></title>
+      <meta name="keywords" content="" />
+      <meta name="description" content="" />
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+      <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    -->
+</head>
+<body>
+  <!--main box -->
+  <div class="box-border">
+    <div class="box-background">
+      <div class="top">
+        <!--left content -->
+        <div class="left">
+          <img src="assets/images/big-img.png" alt="" />
+        </div>
+        <!--right content -->
+        <div class="right">
+          <h1>ALOHA!</h1>
+          <p>Nous sommes sur la rampe de lancement et ton aide peut nous aider à décoller.<br><br>En connectant ton compte Facebook nous pourrons bénéficier d'un fort impact de communication.<br><br><strong>Nous te promettons de ne jamais en abuser !</strong><br><br>Connecte ton compte en <a href="#">cliquant sur le lien ci-dessous</a>.</p>
+        </div>
+      </div>
+      <!--bottom button -->
+      <div class="bottom">
+        <a href="/authenticate/facebook" class="button">Facebook</a>
+      </div>
+    </div>
+  </div>
+  <!--footer -->
+  <div class="bottom-text">
+    <a href="http://www.wimha.com">www.wimha.com</a>
+  </div>
+</body>
+</html>
