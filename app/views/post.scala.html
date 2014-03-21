@@ -1,0 +1,9 @@
+<form method="POST">
+    <input type="text" name="message"/>
+</form>
+
+posting accounts :
+
+@for(identityId <- models.IdentityId.findAll()){
+    @identityId.providerId: @identityId.userId  <br>
+}
