@@ -19,7 +19,7 @@ class PostgresUserService(application: Application) extends UserServicePlugin(ap
   def find(id: IdentityId):Option[Identity] = {
     Registry.providers.get(id.providerId) match {
       case Some(p) => {
-        var app_user = User.findByIdentityId(id)
+        val app_user = User.findByIdentityId(id)
         if (app_user != null) {
           val socialUser = new SocialUser(id,
             "",
