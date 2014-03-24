@@ -8,6 +8,7 @@ import org.apache.commons.codec.binary.Hex;
 import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import scala.Option;
 import scala.util.Either;
@@ -21,12 +22,19 @@ import java.security.NoSuchAlgorithmException;
 public class Application extends Controller {
 
     public static Result index() {
-        Either<Error, Option<Authenticator>> authenticator= Authenticator.find(ctx().request().cookie(Authenticator.cookieName()).value());
-        if(authenticator.isRight()){
-            Option<Authenticator> auth = authenticator.right().get();
-            if(auth.isDefined()){
-                if(auth.get().identityId().providerId().equals("facebook")){
-                    return ok(index.render(true));
+        Http.Cookie cookie = ctx().request().cookie(Authenticator.cookieName());
+
+        if(cookie!=null) {
+            Either<Error, Option<Authenticator>> authenticator = Authenticator.find(cookie.value());
+
+            if (authenticator.isRight()) {
+                Option<Authenticator> auth = authenticator.right().get();
+
+                if (auth.isDefined()) {
+
+                    if (auth.get().identityId().providerId().equals("facebook")) {
+                        return ok(index.render(true));
+                    }
                 }
             }
         }

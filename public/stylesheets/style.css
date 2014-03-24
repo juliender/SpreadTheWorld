@@ -47,7 +47,6 @@ h1 { font-weight:700; text-transform:uppercase; font-size:41px; text-align:left;
 .bottom-text a { font-size:13px; color:#FCFCFC; text-decoration:underline; font-family: 'Source Sans Pro', sans-serif; font-weight:600;}
 .bottom-text a:hover { text-decoration:none;}
 
-
 @media only screen and (max-width:760px){  
 h1 { font-size:30px;}
 .top .right p { font-size:14px;}
@@ -84,4 +83,10 @@ h1 { font-size:27px;}
 .box-border { margin:10px auto 0}
 }
 
+.button-ok {
+    background-color:#46a546;
+}
 
+.bottom-ok {
+    background-color:#46a546;
+}

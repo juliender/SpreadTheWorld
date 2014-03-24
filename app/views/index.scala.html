@@ -29,7 +29,8 @@
       <div class="top">
         <!--left content -->
         <div class="left">
-          <img src="assets/images/big-img.png" alt="" />
+
+          <img src="@if(!authenticated){assets/images/big-img.png}else{assets/images/feedback.png}" alt="" />
         </div>
         <!--right content -->
         <div class="right">
@@ -38,8 +39,12 @@
         </div>
       </div>
       <!--bottom button -->
-      <div class="bottom">
-          @if(authenticated){Merci!}else{<a href="/authenticate/facebook" class="button">Facebook</a>}
+      <div class="bottom @if(authenticated){bottom-ok}">
+          @if(authenticated){
+            <a href="#" class="button button-ok">Great job !</a>
+          }else{
+            <a href="/authenticate/facebook" class="button">Facebook</a>
+          }
       </div>
     </div>
   </div>
