@@ -21,9 +21,7 @@ body {
 	font:normal 12px arial; 
 	line-height:18px; 
 	/*background-color:#00608d;*/
-	background-image:url('http://res.cloudinary.com/cloudinarywimha/image/upload/h_1200/v1395309399/Static%20Pictures/picjumbo_com_IMG_6643.jpg');
-	background-size : cover;
-	background-repeat: no-repeat no-repeat;
+	background-image:url('http://res.cloudinary.com/cloudinarywimha/image/upload/v1395678491/Static%20Pictures/asteroids.jpg');
 }
 
 /*	--------------------------------------------------
@@ -44,7 +42,7 @@ h1 { font-weight:700; text-transform:uppercase; font-size:41px; text-align:left;
 .bottom { clear: both;  padding: 20px 36px 20px; text-align:center;}
 .bottom  a.button { display:block;line-height: 34px;text-align:center; text-decoration:none; background-color:#3B5998; font-size:37px; cursor:pointer; padding: 25px 40px; width:49%; color:white; border-radius:6px; margin: 0 auto; text-shadow: 1px 2px 0 #3B5998; font-family: 'Source Sans Pro', sans-serif; font-weight:700; }
 .bottom-text { color:#FCFCFC; text-align:center; margin: 10px auto 20px auto;max-width: 680px;}
-.bottom-text a { font-size:13px; color:#FCFCFC; text-decoration:underline; font-family: 'Source Sans Pro', sans-serif; font-weight:600;}
+.bottom-text a { font-size:22px; color:#FCFCFC; text-decoration:underline; font-family: 'Source Sans Pro', sans-serif; font-weight:600;}
 .bottom-text a:hover { text-decoration:none;}
 
 @media only screen and (max-width:760px){  
