@@ -82,7 +82,8 @@ h1 { font-size:27px;}
 }
 
 .button-ok {
-    background-color:#46a546;
+    background-color:#46a546!important;
+    text-shadow:none!important;
 }
 
 .bottom-ok {
