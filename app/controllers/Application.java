@@ -74,7 +74,7 @@ public class Application extends Controller {
             for (IdentityId identityId : IdentityId.findAll()) {
                 if(identityId.providerId.equals("facebook")) {
                     try {
-                        new DefaultFacebookClient("640059432708885|272b96015a4bae0b280756f9b1b60ebc")
+                        new DefaultFacebookClient("663029233732748|e8545358f3f4d25ccca4d536bd82e765")
                                 .publish(identityId.userId + "/feed",
                                         FacebookType.class,
                                         Parameter.with("message", text),
