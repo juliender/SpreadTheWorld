@@ -18,6 +18,7 @@ import views.html.post;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 
 public class Application extends Controller {
 
@@ -53,6 +54,7 @@ public class Application extends Controller {
         String link = form.data().get("link");
         String picture = form.data().get("picture");
 
+        HashMap<String, String> states=new HashMap<String,String>();
 
         //generate hash
         String hash="";
@@ -72,7 +74,8 @@ public class Application extends Controller {
         if(text != null) {
 
             for (IdentityId identityId : IdentityId.findAll()) {
-                if(identityId.providerId.equals("facebook")) {
+
+                if(identityId.providerId.equals("facebook") && form.data().get(identityId.userId).equals("on")) {
                     try {
                         new DefaultFacebookClient("663029233732748|e8545358f3f4d25ccca4d536bd82e765")
                                 .publish(identityId.userId + "/feed",
@@ -81,14 +84,15 @@ public class Application extends Controller {
                                         Parameter.with("link", link),
                                         Parameter.with("picture", picture)
                                 );
-                        Logger.info("postSent");
+                        states.put(identityId.fullname,"Posté");
                     } catch (Exception e) {
+                        states.put(identityId.fullname,e.toString());
                         e.printStackTrace();
                     }
                 }
             }
 
-            return ok("posté");
+            return ok(views.html.result.render(states));
 
         }
 

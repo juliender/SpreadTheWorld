@@ -19,9 +19,20 @@ public class IdentityId extends Model {
 	@Column
 	public String userId;
 
-	@Column
-	public String providerId;
+    @Column
+    public String providerId;
 
+    @Column
+    public String firstname;
+
+    @Column
+    public String lastname;
+
+    @Column
+    public String fullname;
+
+    @Column
+    public String email;
 
 
 	private static Finder<UUID, IdentityId> finder = new Finder<UUID, IdentityId>(

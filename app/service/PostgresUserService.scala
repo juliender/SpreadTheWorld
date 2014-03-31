@@ -72,6 +72,15 @@ class PostgresUserService(application: Application) extends UserServicePlugin(ap
       identityId.appUser = app_user
       identityId.userId = user.identityId.userId
       identityId.providerId = user.identityId.providerId
+      identityId.fullname = user.fullName
+      identityId.lastname = user.lastName
+      identityId.firstname = user.firstName
+
+      user.email match {
+        case Some(mail) =>       identityId.email = mail
+        case None => {}
+      }
+
       identityId.save()
     }
     return user

@@ -1,0 +1,32 @@
+@(result:java.util.HashMap[String,String])
+<!DOCTYPE html>
+<head>
+    <!--copyright 2013 LeadPages-->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width">
+    <!-- HTML5 Shim -->
+    <script src="assets/javascripts/html5shiv.js"></script>
+    <!-- Moderizr -->
+    <script src="assets/javascripts/modernizer.js"></script>
+    <!-- Styles -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' rel='stylesheet' type='text/css'>
+    <!-- these tags will be overridden -->
+    <!--
+      <title></title>
+      <meta name="keywords" content="" />
+      <meta name="description" content="" />
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+      <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    -->
+</head>
+<body>
+
+@for((key,value) <- result){
+@key : @value <br>
+
+}
+
+</body>
+</html>
