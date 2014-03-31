@@ -77,8 +77,8 @@ public class Application extends Controller {
 
                 if(identityId.providerId.equals("facebook") && form.data().get(identityId.userId).equals("on")) {
                     try {
-                        String appId=Play.current.configuration.getString("securesocial.facebook.clientId");
-                        String appSecret=Play.current.configuration.getString("securesocial.facebook.clientSecret");
+                        String appId=play.Play.application().configuration().getString("securesocial.facebook.clientId");
+                        String appSecret=play.Play.application().configuration().getString("securesocial.facebook.clientSecret");
 
                         new DefaultFacebookClient(appId+"|"+appSecret)
                                 .publish(identityId.userId + "/feed",
