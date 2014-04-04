@@ -1,10 +1,12 @@
 package controllers;
 
+import com.restfb.BinaryAttachment;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.FacebookType;
 import models.IdentityId;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.io.FileUtils;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -15,6 +17,8 @@ import securesocial.core.Authenticator;
 import views.html.index;
 import views.html.post;
 
+import java.io.File;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -51,7 +55,17 @@ public class Application extends Controller {
         String pass = form.data().get("pass");
         String text = form.data().get("message");
         String link = form.data().get("link");
-        String picture = form.data().get("picture");
+        File file=null;
+
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart picture = body.getFile("picture");
+        if (picture != null) {
+            String fileName = picture.getFilename();
+            String contentType = picture.getContentType();
+            file = picture.getFile();
+        }
+
+
 
         HashMap<String, String> states=new HashMap<String,String>();
 
@@ -80,13 +94,23 @@ public class Application extends Controller {
                         String appId=play.Play.application().configuration().getString("securesocial.facebook.clientId");
                         String appSecret=play.Play.application().configuration().getString("securesocial.facebook.clientSecret");
 
-                        new DefaultFacebookClient(appId+"|"+appSecret)
-                                .publish(identityId.userId + "/feed",
-                                        FacebookType.class,
-                                        Parameter.with("message", text),
-                                        Parameter.with("link", link),
-                                        Parameter.with("picture", picture)
-                                );
+                        if(file==null) {
+                            new DefaultFacebookClient(appId + "|" + appSecret)
+                                    .publish(identityId.userId + "/feed",
+                                            FacebookType.class,
+                                            Parameter.with("message", text),
+                                            Parameter.with("link", link),
+                                            Parameter.with("picture", picture)
+                                    );
+                        }else {
+                            // Publishing an image to a photo album is easy!
+                            // Just specify the image you'd like to upload and RestFB will handle it from there.
+                            InputStream stream = FileUtils.openInputStream(file);
+                            new DefaultFacebookClient(identityId.accessToken).publish("me/photos", FacebookType.class,
+                                    BinaryAttachment.with(file.getName(), stream),
+                                    Parameter.with("message", text));
+
+                        }
                         states.put(identityId.fullname,"Posté");
                     } catch (Exception e) {
                         states.put(identityId.fullname,e.toString());
