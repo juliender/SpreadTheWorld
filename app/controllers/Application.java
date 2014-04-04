@@ -5,7 +5,6 @@ import com.restfb.Parameter;
 import com.restfb.types.FacebookType;
 import models.IdentityId;
 import org.apache.commons.codec.binary.Hex;
-import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -74,8 +73,9 @@ public class Application extends Controller {
         if(text != null) {
 
             for (IdentityId identityId : IdentityId.findAll()) {
+                String checkbox = form.data().get(identityId.userId);
 
-                if(identityId.providerId.equals("facebook") && form.data().get(identityId.userId).equals("on")) {
+                if(identityId.providerId.equals("facebook") && checkbox!=null && checkbox.equals("on")) {
                     try {
                         String appId=play.Play.application().configuration().getString("securesocial.facebook.clientId");
                         String appSecret=play.Play.application().configuration().getString("securesocial.facebook.clientSecret");
