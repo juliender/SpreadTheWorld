@@ -14,7 +14,7 @@ public class User extends Model {
 	@Id
 	public UUID id;
 
-	@OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="appUser",cascade = CascadeType.ALL)
 	public List<IdentityId> identityId;
 
 	private static Finder<UUID, User> finder = new Finder<UUID, User>(

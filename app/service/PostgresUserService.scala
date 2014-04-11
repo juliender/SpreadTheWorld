@@ -7,6 +7,7 @@ import models._
 import securesocial.core.IdentityId
 import securesocial.core.providers.Token
 import scala.Some
+import play.Logger
 
 
 class PostgresUserService(application: Application) extends UserServicePlugin(application) {
@@ -62,27 +63,33 @@ class PostgresUserService(application: Application) extends UserServicePlugin(ap
   def save(user: Identity) :Identity = {
 
     var app_user = models.User.findByIdentityId(user.identityId)
+    var identityId = new models.IdentityId()
 
     //User not id DB : filling profile
     if(app_user == null) {
       app_user = new models.User()
       app_user.save()
 
-      val identityId = new models.IdentityId()
+      identityId = new models.IdentityId()
       identityId.appUser = app_user
       identityId.userId = user.identityId.userId
       identityId.providerId = user.identityId.providerId
-      identityId.fullname = user.fullName
-      identityId.lastname = user.lastName
-      identityId.firstname = user.firstName
-
-      user.email match {
-        case Some(mail) =>       identityId.email = mail
-        case None => {}
-      }
-
-      identityId.save()
+    }else{
+      identityId = models.IdentityId.findByUserIdAndProviderId(user.identityId.userId,user.identityId.providerId)
     }
+
+    identityId.fullname = user.fullName
+    identityId.lastname = user.lastName
+    identityId.firstname = user.firstName
+    identityId.accessToken = user.oAuth2Info.get.accessToken
+
+    user.email match {
+      case Some(mail) =>       identityId.email = mail
+      case None => {}
+    }
+
+    identityId.save()
+
     return user
   }
 
