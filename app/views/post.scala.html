@@ -1,3 +1,4 @@
+@(appName:String)
 <!DOCTYPE html>
 <head>
     <!--copyright 2013 LeadPages-->
@@ -48,19 +49,19 @@
 
     <h1 class="col-sm-offset-2">sur les comptes de</h1>
 
-    @for(identityId <- models.IdentityId.findAll()){
-
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-6">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="@identityId.userId" checked> @identityId.providerId: @identityId.fullname
-                </label>
+    @for(user <- models.App.findByName(appName).users){
+        @for(identityId <- user.identityId){
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="@identityId.userId" checked> @identityId.providerId: @identityId.fullname
+                        </label>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        }
     }
-
 
     <div class="form-group">
         <button type="submit" class="btn btn-default col-sm-offset-2 col-sm-6"><h1>Poster</h1></button>

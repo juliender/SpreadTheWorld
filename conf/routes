@@ -3,11 +3,12 @@
 # ~~~~
 
 # posting interface
-GET     /post                       controllers.Application.post()
-POST    /post                       controllers.Application.submitPost()
+GET     /:appName/post              controllers.Application.post(appName:String)
+POST    /:appName/post              controllers.Application.submitPost(appName:String)
+
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /:appName                   controllers.Application.index(appName:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -4,9 +4,12 @@ import com.restfb.BinaryAttachment;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.FacebookType;
+import models.App;
 import models.IdentityId;
+import models.User;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
+import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -25,7 +28,9 @@ import java.util.HashMap;
 
 public class Application extends Controller {
 
-    public static Result index() {
+    public static Result index(String appName) {
+        Logger.debug(appName);
+        ctx().session().put("original-url","/"+appName);
         Http.Cookie cookie = ctx().request().cookie(Authenticator.cookieName());
 
         if(cookie!=null) {
@@ -37,6 +42,12 @@ public class Application extends Controller {
                 if (auth.isDefined()) {
 
                     if (auth.get().identityId().providerId().equals("facebook")) {
+                        User user= User.findByIdentityId(auth.get().identityId());
+                        App app=App.get(appName);
+                        if(!app.users.contains(user)){
+                            app.users.add(user);
+                            app.save();
+                        }
                         return ok(index.render(true));
                     }
                 }
@@ -46,11 +57,11 @@ public class Application extends Controller {
         return ok(index.render(false));
     }
 
-    public static Result post() {
-        return ok(post.render());
+    public static Result post(String appName) {
+            return ok(post.render(appName));
     }
 
-    public static Result submitPost() {
+    public static Result submitPost(String appName) {
         DynamicForm form = play.data.Form.form().bindFromRequest();
         String pass = form.data().get("pass");
         String text = form.data().get("message");
