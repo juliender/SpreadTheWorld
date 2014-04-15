@@ -7,7 +7,7 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4",
-  "ws.securesocial" %% "securesocial" % "2.1.3",
+  "ws.securesocial" %% "securesocial" % "master-SNAPSHOT",
   "com.restfb" % "restfb" % "1.6.14",
   "com.github.ndeverge" %% "autoping-play2-plugin" % "0.1.1",
   "commons-io" % "commons-io" % "2.4"
