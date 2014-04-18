@@ -38,11 +38,11 @@ public class Application extends Controller {
             if (app.owner == null) {
                 app.owner = user;
                 app.save();
-                return ok(post.render(appName));
+                return redirect(routes.Application.post(appName));
             }
 
             if (app.owner.equals(user)) {
-                return ok(post.render(appName));
+                return redirect(routes.Application.post(appName));
             }
 
             if (!app.users.contains(user)) {
