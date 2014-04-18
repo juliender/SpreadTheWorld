@@ -42,10 +42,6 @@ public class Application extends Controller {
                 return redirect(routes.Application.post(appName));
             }
 
-            if (app.owner.equals(user)) {
-                return redirect(routes.Application.post(appName));
-            }
-
             if (!app.users.contains(user)) {
                 app.users.add(user);
                 app.save();
