@@ -6,9 +6,8 @@ import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import scala.Option;
-import scala.util.Either;
-import securesocial.core.Authenticator;
+import securesocial.core.Identity;
+import securesocial.core.java.SecureSocial;
 import views.html.index;
 import views.html.post;
 
@@ -18,12 +17,14 @@ import java.util.HashMap;
 public class Application extends Controller {
 
     public static Result index() {
+        //TODO belle home page
         return ok("home page");
     }
 
     public static Result appPage(String appName) {
         App app = App.findByName(appName);
         if (app == null) {
+            //TODO belle error page
             return ok("not exist");
         }
 
@@ -56,6 +57,7 @@ public class Application extends Controller {
         if(user!=null && (user.isAdmin() || App.findByName(appName).owner.equals(user))){
             return ok(post.render(appName));
         }else{
+            //TODO belle error page
             return ok("you're not admin of this page!");
         }
     }
@@ -64,11 +66,13 @@ public class Application extends Controller {
 
         App app=App.findByName(appName);
         if(app==null){
+            //TODO belle error page
             return badRequest("app doesnt exist");
         }
 
         User user=getLoggedUser();
         if(user==null || !user.isAdmin() || !app.owner.equals(user)){
+            //TODO belle error page
             return ok("you're not admin!");
         }
 
@@ -87,9 +91,8 @@ public class Application extends Controller {
             HashMap<String, String> states = Post.send(app, text, link, file, form);
             return ok(views.html.result.render(states));
         }
-
+        //TODO belle error page
         return ok("text vide");
-
     }
 
     public static Result admin() {
@@ -97,6 +100,7 @@ public class Application extends Controller {
         if(user!=null && user.isAdmin()){
             return ok(views.html.admin.render());
         }else{
+            //TODO belle error page
             return ok("you're not admin!");
         }
     }
@@ -120,17 +124,9 @@ public class Application extends Controller {
     }
 
     public static User getLoggedUser(){
-        Http.Cookie cookie = ctx().request().cookie(Authenticator.cookieName());
-        if(cookie!=null) {
-            Either<Error, Option<Authenticator>> authenticator = Authenticator.find(cookie.value());
-            if (authenticator.isRight()) {
-                Option<Authenticator> auth = authenticator.right().get();
-                if (auth.isDefined()) {
-                    if (auth.get().identityId().providerId().equals("facebook")) {
-                        return User.findByIdentityId(auth.get().identityId());
-                    }
-                }
-            }
+        Identity identity = SecureSocial.currentUser();
+        if(identity !=null) {
+            return User.findByIdentityId(identity.identityId());
         }
         return null;
     }

@@ -20,9 +20,10 @@ public class Global extends GlobalSettings {
 
         if(arg0.path().equals("/authenticate/facebook")){
             flash("error", "You should accept the application");
+            String app = URLDecoder.decode(ctx().session().get("original-url")).substring(1);
+            return Promise.pure(Controller.redirect(routes.Application.appPage(app)));
         }
-        String app = URLDecoder.decode(ctx().session().get("original-url")).substring(1);
-        return Promise.pure(Controller.redirect(routes.Application.appPage(app)));
+        return super.onError(arg0, arg1);
 	}
 
     public <T extends EssentialFilter> Class<T>[] filters() {
