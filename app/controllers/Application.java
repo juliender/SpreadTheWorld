@@ -6,8 +6,9 @@ import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import securesocial.core.Identity;
-import securesocial.core.java.SecureSocial;
+import scala.Option;
+import scala.util.Either;
+import securesocial.core.Authenticator;
 import views.html.index;
 import views.html.post;
 
@@ -125,9 +126,17 @@ public class Application extends Controller {
     }
 
     public static User getLoggedUser(){
-        Identity identity = SecureSocial.currentUser();
-        if(identity !=null) {
-            return User.findByIdentityId(identity.identityId());
+        Http.Cookie cookie = ctx().request().cookie(Authenticator.cookieName());
+        if(cookie!=null) {
+            Either<Error, Option<Authenticator>> authenticator = Authenticator.find(cookie.value());
+            if (authenticator.isRight()) {
+                Option<Authenticator> auth = authenticator.right().get();
+                if (auth.isDefined()) {
+                    if (auth.get().identityId().providerId().equals("facebook")) {
+                        return User.findByIdentityId(auth.get().identityId());
+                    }
+                }
+            }
         }
         return null;
     }
