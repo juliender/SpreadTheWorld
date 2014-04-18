@@ -12,6 +12,9 @@ public class App extends Model {
 	@Id
 	public UUID id;
 
+    @OneToOne
+    public User owner;
+
     @Column
     public String name;
 
@@ -39,12 +42,13 @@ public class App extends Model {
         return finder.where().eq("name",appName).findUnique();
     }
 
-    public static App get(String appName) {
+    public static boolean create(String appName) {
         App app = findByName(appName);
         if(app==null){
             app = new App(appName);
             app.save();
+            return true;
         }
-        return app;
+        return false;
     }
 }
