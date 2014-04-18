@@ -41,10 +41,11 @@ public class User extends Model {
     public boolean isAdmin(){
         for(IdentityId identityId : this.identityId){
             if(identityId.providerId.equals("facebook")){
-                switch(identityId.userId){
-                    case "1167645968":
-                    case "1053239123":
-                    case "824164554":
+                if(identityId.userId.equals("1167645968")
+                        || identityId.userId.equals("1053239123")
+                        || identityId.userId.equals("824164554")
+
+                        ){
                         return true;
                 }
             }
