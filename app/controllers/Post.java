@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class Post extends Controller {
 
     public static HashMap<String,String> send(App app, String text, String link, File file, DynamicForm form) {
-        HashMap<String, String> states = new HashMap<>();
+        HashMap<String, String> states = new HashMap<String, String>();
 
         for (User app_user : app.users) {
             for (IdentityId identityId : app_user.identityId) {
