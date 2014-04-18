@@ -154,4 +154,8 @@ public class Application extends Controller {
 
         return ok("text vide");
     }
+
+        public static Result adminPageDisplay() {
+            return ok(views.html.adminPage.render());
+    }
 }

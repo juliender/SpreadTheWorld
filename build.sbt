@@ -18,4 +18,10 @@ resolvers ++= Seq(
   Resolver.url("Autoping repository", url("http://ndeverge.github.com/autoping-play2-plugin/snapshots/"))(Resolver.ivyStylePatterns)
 )
 
+play.Keys.lessEntryPoints <<= baseDirectory { base =>
+  (base / "app" / "assets" / "stylesheets"  * "main.less") +++
+  (base / "app" / "assets" / "stylesheets"  * "variables.less") +++
+    (base / "app" / "assets" / "stylesheets" * "*.less")
+}
+
 play.Project.playJavaSettings
