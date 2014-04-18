@@ -6,6 +6,7 @@ libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
+  filters,
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4",
   "ws.securesocial" %% "securesocial" % "master-SNAPSHOT",
   "com.restfb" % "restfb" % "1.6.14",

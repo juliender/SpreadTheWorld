@@ -46,6 +46,10 @@
             <a href="/authenticate/facebook" class="button">Facebook</a>
           }
       </div>
+        @if( flash.get("error")!=null ) {
+            @flash.get("error")
+        }
+
     </div>
   </div>
   <!--footer -->
