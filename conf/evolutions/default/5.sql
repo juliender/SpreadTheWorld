@@ -9,3 +9,6 @@ ALTER TABLE app ADD constraint fk_owner_id foreign key (owner_id)
    references app_user (id) on delete cascade;
  
 # --- !Downs
+ALTER TABLE app DROP owner_id;
+ALTER TABLE app DROP description;
+ALTER TABLE app DROP picture_url;

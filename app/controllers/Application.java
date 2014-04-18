@@ -31,6 +31,7 @@ public class Application extends Controller {
         User user = getLoggedUser();
         if(user==null) {
             ctx().session().put("original-url", "/" + appName);
+            ctx().session().put("app-url", "/" + appName);
             return ok(index.render(false));
         }else{
 
