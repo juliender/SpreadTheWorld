@@ -20,6 +20,8 @@ POST    /admin/                     controllers.Application.adminSubmit()
 
 GET     /logout/                    controllers.Log.logout
 
+GET 	/adminPage 					controllers.Application.adminPageDisplay()
+
 
 ###### not modified ######
 

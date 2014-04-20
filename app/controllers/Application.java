@@ -136,5 +136,7 @@ public class Application extends Controller {
         }
         return null;
     }
-
+        public static Result adminPageDisplay() {
+            return ok(views.html.adminPage.render());
+    }
 }

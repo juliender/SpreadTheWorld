@@ -1,0 +1,96 @@
+@import "variables.less";
+
+.bold {font-weight: bold;}
+.inlined {display: inline-block;}
+.centered {text-align: center;}
+.alignRight {text-align: right;}
+.pointed {cursor: pointer;}
+
+h1 {margin-top: 45px;}
+
+// Used in the post section and in the landing page section
+
+.uploadPic {
+	min-width: 240px;
+	font-size: 20px;
+	padding: 15px;
+	.fa-picture-o{display: block;}
+	&.landingSection {margin-top: 25px;}
+}
+
+// Post section
+
+.adminBlock {
+	margin-top: -21px;
+	padding-top: 21px;
+	background-color: @gray-darker;
+}
+.adminPicture {
+	height: 80px;
+	width: 80px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+}
+.campaignInfo {
+	list-style: none;
+	padding-left: 0;
+	margin-right: 50px;
+}
+.keketOne {background-color: @brand-primary;}
+.keketTwo {background-color: @gray-light;}
+.keketThree {background-color: @brand-info;}
+
+.keketOne, .keketTwo, .keketThree {
+	margin-left: 50px;
+	min-width: 125px;
+	text-align: center;
+	.number{font-size: 25px;margin-right: 5px;}
+}
+
+.step {margin-top: 40px;}
+.stepLaunch {margin-top: 80px;}
+
+.firstStep {
+	.fbPostMessage {
+		width: 100%;
+	}
+}
+
+.secondStep {
+	.urlInput {margin-top: 20px;min-width: 400px;}
+}
+
+.thirdStep {
+	.ambBlock {
+		padding:15px;
+		background-color: @gray-light;
+		&:hover{background-color:@gray-lighter;color: @gray;};
+	}
+	.ambPictureBlock {}
+	.ambPicture {width: 60px;height:60px;}
+	.ambName {font-size: 20px;}
+}
+
+.postStep {
+	margin-top: 60px;
+	margin-bottom: 60px;
+	button {width: 240px;}
+	.alert {vertical-align: middle;display: inline;}
+}
+
+.BestPractices{
+	padding:15px;
+	background-color: @brand-success;
+	ul {margin-top: 20px;}
+}
+
+// Landing Page section
+
+.landingPageSettings {
+	background-color: @gray-darker;
+	.size {display: inline;vertical-align: bottom;padding-left: 40px;}
+	.inputLanding {width: 100%;margin-top: 40px;}
+}
+
+
