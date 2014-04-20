@@ -37,6 +37,9 @@ public class IdentityId extends Model {
     @Column
     public String accessToken;
 
+    @Column
+    public String pictureUrl;
+
 
 	private static Finder<UUID, IdentityId> finder = new Finder<UUID, IdentityId>(
 			UUID.class, IdentityId.class);

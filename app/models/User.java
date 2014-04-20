@@ -52,4 +52,13 @@ public class User extends Model {
         }
         return false;
     }
+
+    public IdentityId getFacebook(){
+        for(IdentityId i:identityId){
+            if(i.providerId.equals("facebook")){
+                return i;
+            }
+        }
+        return null;
+    }
 }

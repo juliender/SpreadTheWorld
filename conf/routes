@@ -17,11 +17,7 @@ POST    /:appName/post              controllers.Application.submitPost(appName:S
 # Admin page
 GET     /admin/                     controllers.Application.admin()
 POST    /admin/                     controllers.Application.adminSubmit()
-
 GET     /logout/                    controllers.Log.logout
-
-GET 	/adminPage 					controllers.Application.adminPageDisplay()
-
 
 ###### not modified ######
 

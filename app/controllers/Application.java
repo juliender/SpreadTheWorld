@@ -1,8 +1,12 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.App;
 import models.User;
 import play.data.DynamicForm;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -10,10 +14,10 @@ import scala.Option;
 import scala.util.Either;
 import securesocial.core.Authenticator;
 import views.html.index;
-import views.html.post;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class Application extends Controller {
 
@@ -52,8 +56,9 @@ public class Application extends Controller {
 
     public static Result post(String appName) {
         User user=getLoggedUser();
-        if(user!=null && (user.isAdmin() || App.findByName(appName).owner.equals(user))){
-            return ok(post.render(appName));
+        App app = App.findByName(appName);
+        if(user!=null && (user.isAdmin() || app.owner.equals(user))){
+            return ok(views.html.post.render(app));
         }else{
             //TODO belle error page
             return ok("you're not admin of this page!");
@@ -85,12 +90,33 @@ public class Application extends Controller {
             file = picture.getFile();
         }
 
-        if (text != null) {
-            HashMap<String, String> states = Post.send(app, text, link, file, form);
-            return ok(views.html.result.render(states));
+        //Check for errors
+        ObjectNode json = Json.newObject();
+        ArrayNode errors=new ArrayNode(JsonNodeFactory.instance);
+
+        if(picture==null && link==null && text.length()>420) {
+            errors.add("textOnlyLess420");
         }
-        //TODO belle error page
-        return ok("text vide");
+
+        if(text.length()>1000) {
+            errors.add("textLess1000");
+        }
+
+        String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+        if(link!=null && Pattern.matches(regex,link)) {
+            errors.add("notALink");
+        }
+
+        //TODO big work cant fail here !!!
+
+
+        if(errors.size()>0){
+            return ok(json.put("errors",errors));
+        }
+
+        HashMap<String, String> states = Post.send(app, text, link, file, form);
+        return ok(views.html.result.render(states));
+
     }
 
     public static Result admin() {
@@ -135,8 +161,5 @@ public class Application extends Controller {
             }
         }
         return null;
-    }
-        public static Result adminPageDisplay() {
-            return ok(views.html.adminPage.render());
     }
 }

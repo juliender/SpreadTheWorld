@@ -82,6 +82,7 @@ class PostgresUserService(application: Application) extends UserServicePlugin(ap
     identityId.lastname = user.lastName
     identityId.firstname = user.firstName
     identityId.accessToken = user.oAuth2Info.get.accessToken
+    identityId.pictureUrl = user.avatarUrl.getOrElse(null)
 
     user.email match {
       case Some(mail) =>       identityId.email = mail
