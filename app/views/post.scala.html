@@ -33,7 +33,7 @@
     <div class="container-fluid">
         <!-- Brand -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">RockTheFirstCircle!</a>
+            <a class="navbar-brand" href="#">Crowd'n'Rock !</a>
         </div>
     </div><!-- /.container-fluid -->
 </nav>
@@ -82,7 +82,7 @@
     <div class="container">
         <h1>Customize your Facebook post</h1>
         <div class="col-md-7 firstStep step">
-            <textarea name="message" class="fbPostMessage input-lg" rows="4" placeholder="Enter your message here..."></textarea>
+            <textarea name="message" class="fbPostMessage input-lg js_fbPostMessage" rows="4" placeholder="Enter your message here..."></textarea>
             <p class="alignRight">Must be under 300 characters</p>
             <div class="alert alert-dismissable alert-danger hide js_tooManyChars">
                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -99,10 +99,11 @@
         </div>
         <div class="col-md-7 secondStep step centered">
             <button class="centered btn btn-large btn-default uploadPic">
+                <input id="postPicture" type="file" name="picture" style="display:none;">
                 <i class="fa fa-picture-o fa-3x"></i>
                 Upload a picture
             </button>
-            <input type="file" name="picture">
+            
             <h2>OR</h2>
             <input name ="link" class="input-lg urlInput" placeholder="Add a URL here..."/>
         </div>
@@ -164,7 +165,7 @@
                 <i class="fa fa-picture-o fa-3x"></i>
                 Upload a picture
             </button>
-            <p class="size">Min width 1900px. Min height 700px.</p>
+            <p class="size">Min width 1500px. Min height 1000px.</p>
         </div>
         <div class="col-md-5 stepLaunch BestPractices">
             <h2 class="centered">Best practices</h2>
@@ -180,7 +181,7 @@
                 <i class="fa fa-picture-o fa-3x"></i>
                 Upload a picture
             </button>
-            <p class="size">Min width 900px. Min height 400px.</p>
+            <p class="size">Max width 300px. Max height 350px.</p>
         </div>
         <div class="col-md-5 stepLaunch BestPractices">
             <h2 class="centered">Best practices</h2>
