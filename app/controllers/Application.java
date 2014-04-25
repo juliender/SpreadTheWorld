@@ -76,7 +76,7 @@ public class Application extends Controller {
         User user=getLoggedUser();
         if(user==null || !user.isAdmin() || !app.owner.equals(user)){
             //TODO belle error page
-            return ok("you're not admin!");
+        //    return ok("you're not admin!");
         }
 
         DynamicForm form = play.data.Form.form().bindFromRequest();
