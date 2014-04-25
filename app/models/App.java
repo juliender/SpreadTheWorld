@@ -12,15 +12,24 @@ public class App extends Model {
 	@Id
 	public UUID id;
 
-    @OneToOne
-    public User owner;
-
     @Column
     public String name;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "membership")
     public List<User> users;
+
+    @OneToOne
+    public User owner;
+
+    @ManyToOne
+    public Picture backgroundPicture;
+
+    @ManyToOne
+    public Picture middlePicture;
+
+    @Column
+    public String message;
 
     public App(String appName){
         this.name=appName;

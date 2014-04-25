@@ -11,7 +11,8 @@ libraryDependencies ++= Seq(
   "ws.securesocial" %% "securesocial" % "master-SNAPSHOT",
   "com.restfb" % "restfb" % "1.6.14",
   "com.github.ndeverge" %% "autoping-play2-plugin" % "0.1.1",
-  "commons-io" % "commons-io" % "2.4"
+  "commons-io" % "commons-io" % "2.4",
+  "com.cloudinary" % "cloudinary" % "1.0.8"
 )
 
 resolvers ++= Seq(
