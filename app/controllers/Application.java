@@ -57,12 +57,12 @@ public class Application extends Controller {
     public static Result post(String appName) {
         User user=getLoggedUser();
         App app = App.findByName(appName);
-        if(user!=null && (user.isAdmin() || app.owner.equals(user))){
+        //if(user!=null && (user.isAdmin() || app.owner.equals(user))){
             return ok(views.html.post.render(app));
-        }else{
+        //}else{
             //TODO belle error page
-            return ok("you're not admin of this page!");
-        }
+        //    return ok("you're not admin of this page!");
+        //}
     }
 
     public static Result submitPost(String appName) {
