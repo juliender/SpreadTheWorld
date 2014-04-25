@@ -3,7 +3,7 @@
 # --- !Ups
 create table picture (
   id					varchar(40) not null,
-  type      			text,
+  content_type          text,
   version               text,
   constraint pk_picture_id primary key (id)
 );
