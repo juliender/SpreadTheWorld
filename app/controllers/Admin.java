@@ -84,7 +84,6 @@ public class Admin extends Controller{
 
         //TODO big work cant fail here !!!
 
-
         if(errors.size()>0){
             return ok(json.put("errors",errors));
         }
@@ -113,7 +112,8 @@ public class Admin extends Controller{
         DynamicForm form = play.data.Form.form().bindFromRequest();
         String message = form.data().get("message");
         if(message.length()>300){
-            flash("error_length_modif_message","");
+            flash("error_length_modif_message","Trop long");
+            return redirect(routes.Admin.post(appName)  );
         }
         if(message!=null){
             app.message=message;

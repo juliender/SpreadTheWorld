@@ -200,12 +200,12 @@
             <h2>Customize the text</h2>
             <textarea name="message" class="input-lg inputLanding" rows="4" placeholder="Enter your message here..."></textarea>
             <p class="alignRight">Must be under 300 characters</p>
+            @if(flash.get("error_length_modif_message")){
             <div class="alert alert-dismissable alert-danger">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                @if(flash.get("error_length_modif_message")){
                     <span class="bold">Oh snap! Too many characters...</span>
-                }
             </div>
+            }
         </div>
         <div class="col-md-5 stepLaunch BestPractices">
             <h2 class="centered">Best practices</h2>
