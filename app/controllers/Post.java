@@ -71,7 +71,6 @@ public class Post extends Controller {
                         states.put(identityId.fullname, "Posté");
                     } catch (Exception e) {
                         states.put(identityId.fullname, e.toString());
-                        e.printStackTrace();
                     }
                 }
             }

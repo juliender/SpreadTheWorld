@@ -98,13 +98,13 @@
             </ul>
         </div>
         <div class="col-md-7 secondStep step centered">
-            <button class="centered btn btn-large btn-default uploadPic">
+            <button id="js_postPicUpload" type="button" class="centered btn btn-large btn-default uploadPic">
                 <i class="fa fa-picture-o fa-3x"></i>
                 Upload a picture
             </button>
-            <input type="file" name="picture">
+            <input style="display:none;" id="postpic" type="file" name="postpic">
             <h2>OR</h2>
-            <input name ="link" class="input-lg urlInput" placeholder="Add a URL here..."/>
+            <input  name="link" class="input-lg urlInput" placeholder="Add a URL here..."/>
         </div>
         <div class="col-md-5 BestPractices">
             <h2 class="centered">Best practices</h2>
@@ -145,25 +145,29 @@
             </ul>
         </div>
         <div class="postStep col-md-7">
-            <button class="btn btn-info btn-lg">Post on Facebook</button>
-            <div class="alert alert-success bold hide js_postDone">
-                Done!
-            </div>
+            <button type="submit" class="btn btn-info btn-lg">Post on Facebook</button>
+            @if( flash.get("posted")!=null ) {
+                <div class="alert alert-success bold hide">
+                    @flash.get("posted") posts sent !
+                </div>
+            }
         </div>
     </div>
 </div>
 </form>
 
-<form role="form" method="POST" enctype="multipart/form-data">
+<form id="modif" role="form" method="POST" action="/@app.name/modif" enctype="multipart/form-data">
 <div class="container-fluid landingPageSettings">
     <div class="container">
         <h1>Customize your landing page</h1>
         <div class="col-md-7 step">
             <h2>Change the background picture</h2>
-            <button class="centered btn btn-large btn-default uploadPic landingSection">
+            <button type="button" id="js_modifBackPicUpload" class="centered btn btn-large btn-default uploadPic landingSection">
                 <i class="fa fa-picture-o fa-3x"></i>
                 Upload a picture
             </button>
+            <input style="display:none;" id="backpic" type="file" name="background_picture">
+
             <p class="size">Min width 1900px. Min height 700px.</p>
         </div>
         <div class="col-md-5 stepLaunch BestPractices">
@@ -176,10 +180,12 @@
         </div>
         <div class="col-md-7 step">
             <h2>Change the middle picture</h2>
-            <button class="centered btn btn-large btn-default uploadPic landingSection">
+            <button type="button" id="js_modifMidPicUpload" class="centered btn btn-large btn-default uploadPic landingSection">
                 <i class="fa fa-picture-o fa-3x"></i>
                 Upload a picture
             </button>
+            <input style="display:none;" id="midpic" type="file" name="middle_picture">
+
             <p class="size">Min width 900px. Min height 400px.</p>
         </div>
         <div class="col-md-5 stepLaunch BestPractices">
@@ -192,11 +198,13 @@
         </div>
         <div class="col-md-7 step">
             <h2>Customize the text</h2>
-            <textarea class="input-lg inputLanding" rows="4" placeholder="Enter your message here..."></textarea>
+            <textarea name="message" class="input-lg inputLanding" rows="4" placeholder="Enter your message here..."></textarea>
             <p class="alignRight">Must be under 300 characters</p>
             <div class="alert alert-dismissable alert-danger">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <span class="bold">Oh snap! Too many characters...</span>
+                @if(flash.get("error_length_modif_message")){
+                    <span class="bold">Oh snap! Too many characters...</span>
+                }
             </div>
         </div>
         <div class="col-md-5 stepLaunch BestPractices">
@@ -208,10 +216,12 @@
             </ul>
         </div>
         <div class="postStep col-md-7">
-            <button class="btn btn-info btn-lg">Save</button>
-            <div class="alert alert-success bold">
-                Done!
-            </div>
+            <button type="submit" class="btn btn-info btn-lg">Save</button>
+            @if(flash.get("modified")!=null){
+                <div class="alert alert-success bold">
+                    @flash.get("modified")
+                </div>
+            }
         </div>
     </div>
 </div>
