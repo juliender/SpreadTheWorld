@@ -10,11 +10,12 @@ GET     /                           controllers.Application.index()
 GET     /:appName                   controllers.Application.appPage(appName:String)
 
 # Posting interface
-GET     /:appName/post              controllers.Application.post(appName:String)
-POST    /:appName/post              controllers.Application.submitPost(appName:String)
+GET     /:appName/post              controllers.Admin.post(appName:String)
+POST    /:appName/post              controllers.Admin.submitPost(appName:String)
+POST    /:appName/modif             controllers.Admin.submitModif(appName:String)
 
 
-# Admin page
+# App creation
 GET     /admin/                     controllers.Application.admin()
 POST    /admin/                     controllers.Application.adminSubmit()
 GET     /logout/                    controllers.Log.logout

@@ -1,4 +1,4 @@
-@(authenticated:Boolean)
+@(app:App)(user:User)
 
 <!DOCTYPE html>
 <head>
@@ -34,17 +34,21 @@
         <!--left content -->
         <div class="left">
 
-          <img src="@if(!authenticated){assets/images/big-img.png}else{assets/images/feedback.png}" alt="" />
+          <img src="@if(user==null){assets/images/big-img.png}else{assets/images/feedback.png}" alt="" />
         </div>
         <!--right content -->
         <div class="right">
           <h1>ALOHA!</h1>
-          <p>Nous sommes sur la rampe de lancement et ton aide peut nous aider à décoller.<br><br>En connectant ton compte Facebook nous pourrons bénéficier d'un fort impact de communication.<br><br><strong>Nous te promettons de ne jamais en abuser !</strong><br><br>Connecte ton compte en <a href="#">cliquant sur le lien ci-dessous</a>.</p>
+            @if(app.message!=null){
+                app.
+            }else{
+                <p>Nous sommes sur la rampe de lancement et ton aide peut nous aider à décoller.<br><br>En connectant ton compte Facebook nous pourrons bénéficier d'un fort impact de communication.<br><br><strong>Nous te promettons de ne jamais en abuser !</strong><br><br>Connecte ton compte en <a href="#">cliquant sur le lien ci-dessous</a>.</p>
+            }
         </div>
       </div>
       <!--bottom button -->
-      <div class="bottom @if(authenticated){bottom-ok}">
-          @if(authenticated){
+      <div class="bottom @if(user!=null){bottom-ok}">
+          @if(user!=null){
             <a href="#" class="button button-ok">Great job !</a>
           }else{
             <a href="/authenticate/facebook" class="button">Facebook</a>
