@@ -25,8 +25,14 @@
 
 </head>
 <body>
-  <div class="background-image-overlay" style="background:url(http://res.cloudinary.com/cloudinarywimha/image/upload/v1398417294/Static%20Pictures/space.jpg);
-"></div>
+@if(app.backgroundPicture!=null){
+<div class="background-image-overlay" style="background:url(@app.backgroundPicture.url());"></div>
+
+}else{
+<div class="background-image-overlay" style="background:url(http://res.cloudinary.com/cloudinarywimha/image/upload/v1398417294/Static%20Pictures/space.jpg);">
+
+}
+</div>
   <!--main box -->
   <div class="box-border">
     <div class="box-background">
@@ -34,12 +40,16 @@
         <!--left content -->
         <div class="left">
 
-          <img src="@if(user==null){assets/images/big-img.png}else{assets/images/feedback.png}" alt="" />
+           @if(app.middlePicture!=null){
+                <img src="@app.middlePicture.url()" alt="" />
+            }else{
+                <img src="@if(user==null){assets/images/big-img.png}else{assets/images/feedback.png}" alt="" />
+            }
         </div>
         <!--right content -->
         <div class="right">
           <h1>ALOHA!</h1>
-            @if(app.message!=null){
+            @if(app.message!=null && !app.message.trim().equals("")){
                 app.
             }else{
                 <p>Nous sommes sur la rampe de lancement et ton aide peut nous aider à décoller.<br><br>En connectant ton compte Facebook nous pourrons bénéficier d'un fort impact de communication.<br><br><strong>Nous te promettons de ne jamais en abuser !</strong><br><br>Connecte ton compte en <a href="#">cliquant sur le lien ci-dessous</a>.</p>
