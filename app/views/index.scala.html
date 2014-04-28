@@ -58,10 +58,10 @@
       </div>
       <!--bottom button -->
       <div class="bottom @if(user!=null){bottom-ok}">
-          @if(user!=null && app.users.contains(user)){
-            <a href="#" class="button button-ok">Great job !</a>
+          @if(user==null || !app.users.contains(user)){
+              <a href="/authenticate/facebook" class="button">Facebook</a>
           }else{
-            <a href="/authenticate/facebook" class="button">Facebook</a>
+              <a href="#" class="button button-ok">Great job !</a>
           }
       </div>
         @if( flash.get("error")!=null ) {
