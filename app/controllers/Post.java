@@ -20,8 +20,9 @@ import java.util.HashMap;
  */
 public class Post extends Controller {
 
-    public static HashMap<String,String> send(App app, String text, String link, File file, DynamicForm form) {
+    public static int send(App app, String text, String link, File file, DynamicForm form) {
         HashMap<String, String> states = new HashMap<String, String>();
+        int count=0;
 
         for (User app_user : app.users) {
             for (IdentityId identityId : app_user.identityId) {
@@ -69,13 +70,17 @@ public class Post extends Controller {
 
                         }
                         states.put(identityId.fullname, "Posté");
+                        count++;
+
                     } catch (Exception e) {
                         states.put(identityId.fullname, e.toString());
                     }
                 }
             }
         }
-        return states;
+
+        app.countMessages+=count;
+        return count;
 
     }
 }

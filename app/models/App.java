@@ -31,8 +31,12 @@ public class App extends Model {
     @Column
     public String message;
 
+    @Column
+    public int countMessages;
+
     public App(String appName){
         this.name=appName;
+        this.countMessages=0;
     }
 
 	private static Finder<UUID, App> finder = new Finder<UUID, App>(

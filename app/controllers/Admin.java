@@ -74,9 +74,9 @@ public class Admin extends Controller{
             return redirect(routes.Admin.post(appName));
         }
 
-        HashMap<String, String> states = Post.send(app, text, link, file, form);
+        int count = Post.send(app, text, link, file, form);
         //return ok(views.html.result.render(states));
-        flash("posted",states.values().size()+"");
+        flash("posted",count+"");
         return redirect(routes.Admin.post(appName));
     }
 
