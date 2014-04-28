@@ -5,9 +5,11 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET     /clicFB                     controllers.Application.clicFBC()
 
 # App page
 GET     /:appName                   controllers.Application.appPage(appName:String)
+
 
 # Posting interface
 GET     /:appName/post              controllers.Admin.post(appName:String)

@@ -62,7 +62,7 @@
           @if(user!=null && app.users.contains(user)){
             <a href="#" class="button button-ok">Great job !</a>
           }else{
-            <a href="/authenticate/facebook" class="button">Facebook</a>
+            <a href="@routes.Application.clicFBC()" class="button">Facebook</a>
           }
         </div>
 

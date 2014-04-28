@@ -31,7 +31,6 @@ public class Application extends Controller {
 
         User user = getLoggedUser(ctx());
         if(user==null) {
-
             return ok(index.render(app, user));
         }else{
 
@@ -41,12 +40,18 @@ public class Application extends Controller {
                 return redirect(routes.Admin.post(appName));
             }
 
-            if (!app.users.contains(user)) {
+            if (ctx().session().containsKey("save_app") && !app.users.contains(user)) {
+                ctx().session().remove("save_app");
                 app.users.add(user);
                 app.save();
             }
             return ok(index.render(app, user));
         }
+    }
+
+    public static Result clicFBC(){
+        ctx().session().put("save_app","");
+        return redirect("/authenticate/facebook");
     }
 
 
