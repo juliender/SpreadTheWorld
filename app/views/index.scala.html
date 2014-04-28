@@ -57,7 +57,7 @@
         </div>
       </div>
       <!--bottom button -->
-      @defining(user==null || user!=null && app.users.contains(user)){ new =>
+      @defining( user==null || (user!=null && app.users.contains(user)) ) { new =>
         <div class="bottom @if(!new){bottom-ok}">
           @if(new){
               <a href="/authenticate/facebook" class="button">Facebook</a>
