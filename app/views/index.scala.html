@@ -57,15 +57,15 @@
         </div>
       </div>
       <!--bottom button -->
-      @defining( user==null || (user!=null && app.users.contains(user)) ) { new =>
-        <div class="bottom @if(!new){bottom-ok}">
-          @if(new){
+
+        <div class="bottom @if(!(user==null || (user!=null && app.users.contains(user)))){bottom-ok}">
+          @if(user==null || (user!=null && app.users.contains(user))){
               <a href="/authenticate/facebook" class="button">Facebook</a>
           }else{
               <a href="#" class="button button-ok">Great job !</a>
           }
         </div>
-      }
+
         @if( flash.get("error")!=null ) {
             @flash.get("error")
         }
