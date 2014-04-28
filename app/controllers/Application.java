@@ -20,15 +20,18 @@ public class Application extends Controller {
 
     public static Result appPage(String appName) {
         App app = App.findByName(appName);
+
         if (app == null) {
             //TODO belle error page
             return ok("not exist");
         }
 
+        ctx().session().put("original-url", "/" + appName);
+        ctx().session().put("app-url", "/" + appName);
+
         User user = getLoggedUser(ctx());
         if(user==null) {
-            ctx().session().put("original-url", "/" + appName);
-            ctx().session().put("app-url", "/" + appName);
+
             return ok(index.render(app, user));
         }else{
 
