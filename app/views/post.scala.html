@@ -83,11 +83,13 @@
         <h1>Customize your Facebook post</h1>
         <div class="col-md-7 firstStep step">
             <textarea name="message" class="fbPostMessage input-lg js_fbPostMessage" rows="4" placeholder="Enter your message here..."></textarea>
-            <p class="alignRight">Must be under 300 characters</p>
-            <div class="alert alert-dismissable alert-danger hide js_tooManyChars">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <span class="bold">Oh snap! Too many characters...</span>
-            </div>
+            <p class="alignRight"><span class="js_count">0</span> / 300 characters</p>
+            @if(flash.get("error_post_length")!=null){
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <span class="bold">Oh snap! Too many characters...</span>
+                </div>
+            }
         </div>
         <div class="col-md-5 BestPractices">
             <h2 class="centered">Best practices</h2>
@@ -104,7 +106,12 @@
                 Upload a picture
             </button>
             <h2>OR</h2>
-            <input  name="link" class="input-lg urlInput" placeholder="Add a URL here..."/>
+            <input  name="link" class="input-lg urlInput js_link" placeholder="Add a URL here..."/>
+            <div class="alert alert-dismissable alert-danger js_link_error @if(flash.get("error_post_link")==null){hide}">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <span class="bold">This is not a link !</span>
+            </div>
+
         </div>
         <div class="col-md-5 BestPractices">
             <h2 class="centered">Best practices</h2>
@@ -198,9 +205,9 @@
         </div>
         <div class="col-md-7 step">
             <h2>Customize the text</h2>
-            <textarea name="message" class="input-lg inputLanding" rows="4" placeholder="Enter your message here..."></textarea>
-            <p class="alignRight">Must be under 300 characters</p>
-            @if(flash.get("error_length_modif_message")){
+            <textarea name="message" class="input-lg inputLanding js_modifMessage" rows="4" placeholder="Enter your message here..."></textarea>
+            <p class="alignRight"><span class="js_count">0</span> / 300 characters</p>
+            @if(flash.get("error_modif_length")){
             <div class="alert alert-dismissable alert-danger">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                     <span class="bold">Oh snap! Too many characters...</span>
@@ -226,6 +233,7 @@
     </div>
 </div>
 </form>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script src="@routes.Assets.at("javascripts/post.min.js")"></script>
 
