@@ -74,16 +74,10 @@ public class Admin extends Controller{
             return redirect(routes.Admin.post(appName));
         }
 
-        String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-        if(link!=null && Pattern.matches(regex, link)) {
-            flash("error_post_link","");
-            return redirect(routes.Admin.post(appName));
-        }
-
         HashMap<String, String> states = Post.send(app, text, link, file, form);
         //return ok(views.html.result.render(states));
         flash("posted",states.values().size()+"");
-        return ok(post.render(app));
+        return redirect(routes.Admin.post(appName));
     }
 
     public static Result submitModif(String appName){
