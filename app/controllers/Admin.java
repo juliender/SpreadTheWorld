@@ -26,12 +26,12 @@ public class Admin extends Controller{
     public static Result post(String appName) {
         User user=Application.getLoggedUser(ctx());
         App app = App.findByName(appName);
-        //if(user!=null && (user.isAdmin() || app.owner.equals(user))){
-        return ok(views.html.post.render(app));
-        //}else{
-        //TODO belle error page
-        //    return ok("you're not admin of this page!");
-        //}
+        if(user!=null && (user.isAdmin() || app.owner.equals(user))){
+            return ok(views.html.post.render(app));
+        }else{
+        //TODO: belle error page
+            return ok("you're not admin of this page!");
+        }
     }
 
     public static Result submitPost(String appName) {
@@ -45,7 +45,7 @@ public class Admin extends Controller{
         User user=Application.getLoggedUser(ctx());
         if(user==null || !user.isAdmin() || !app.owner.equals(user)){
             //TODO belle error page
-            //    return ok("you're not admin!");
+            return ok("you're not admin!");
         }
 
         DynamicForm form = play.data.Form.form().bindFromRequest();
@@ -75,7 +75,7 @@ public class Admin extends Controller{
         }
 
         int count = Post.send(app, text, link, file, form);
-        //return ok(views.html.result.render(states));
+
         flash("posted",count+"");
         return redirect(routes.Admin.post(appName));
     }
@@ -91,7 +91,7 @@ public class Admin extends Controller{
 
         if(user==null || !user.equals(app.owner)){
             //todo
-            //return ok("not admin");
+            return ok("not admin");
         }
 
         DynamicForm form = play.data.Form.form().bindFromRequest();
