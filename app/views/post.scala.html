@@ -99,19 +99,20 @@
                 <li>Best practices three</li>
             </ul>
         </div>
-        <div class="col-md-7 secondStep step centered">
+        <div id="posted" class="col-md-7 secondStep step centered">
+            <input  name="link" class="input-lg urlInput js_link" placeholder="Add a URL here..."/>
+            <div class="alert alert-dismissable alert-danger js_link_error hide">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <span class="bold">This is not a link !</span>
+            </div>
+
+            <h2>OR</h2>
+
             <button id="js_postPicUpload" class="centered btn btn-large btn-default uploadPic">
                 <input id="postpic" type="file" name="postpic" style="display:none;">
                 <i class="fa fa-picture-o fa-3x"></i>
                 Upload a picture
             </button>
-            <h2>OR</h2>
-            <input  name="link" class="input-lg urlInput js_link" placeholder="Add a URL here..."/>
-            <div class="alert alert-dismissable alert-danger js_link_error @if(flash.get("error_post_link")==null){hide}">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <span class="bold">This is not a link !</span>
-            </div>
-
         </div>
         <div class="col-md-5 BestPractices">
             <h2 class="centered">Best practices</h2>
@@ -154,9 +155,10 @@
         <div class="postStep col-md-7">
             <button type="submit" class="btn btn-info btn-lg">Post on Facebook</button>
             @if( flash.get("posted")!=null ) {
-                <div class="alert alert-success bold hide">
+                <div  class="alert alert-success bold">
                     @flash.get("posted") posts sent !
                 </div>
+                <script>location.href+="#posted"</script>
             }
         </div>
     </div>
@@ -225,9 +227,11 @@
         <div class="postStep col-md-7">
             <button type="submit" class="btn btn-info btn-lg">Save</button>
             @if(flash.get("modified")!=null){
-                <div class="alert alert-success bold">
+                <div id="modified" class="alert alert-success bold">
                     @flash.get("modified")
                 </div>
+            <script>location.href+="#modified"</script>
+
             }
         </div>
     </div>
