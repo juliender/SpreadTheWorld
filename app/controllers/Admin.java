@@ -60,7 +60,6 @@ public class Admin extends Controller{
         if(body!=null) {
             picture = body.getFile("picture");
             if (picture != null) {
-                Logger.error(("pic ok"));
                 file = picture.getFile();
             }
         }
@@ -69,23 +68,16 @@ public class Admin extends Controller{
         ObjectNode json = Json.newObject();
         ArrayNode errors=new ArrayNode(JsonNodeFactory.instance);
 
-        if(picture==null && link==null && text!=null && text.length()>420) {
-            errors.add("textOnlyLess420");
-        }
-
-        if(text!=null && text.length()>1000) {
-            errors.add("textLess1000");
+        if(text!=null && text.length()>300) {
+            Logger.error("post length");
+            flash("error_post_length","");
+            return redirect(routes.Admin.post(appName));
         }
 
         String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
         if(link!=null && Pattern.matches(regex, link)) {
-            errors.add("notALink");
-        }
-
-        //TODO big work cant fail here !!!
-
-        if(errors.size()>0){
-            return ok(json.put("errors",errors));
+            flash("error_post_link","");
+            return redirect(routes.Admin.post(appName));
         }
 
         HashMap<String, String> states = Post.send(app, text, link, file, form);
@@ -95,7 +87,6 @@ public class Admin extends Controller{
     }
 
     public static Result submitModif(String appName){
-        Logger.error("okin");
         App app=App.findByName(appName);
         if(app==null){
             //todo
@@ -104,16 +95,16 @@ public class Admin extends Controller{
 
         User user=Application.getLoggedUser(ctx());
 
-//        if(user!=null || !user.equals(app.owner)){
-//            //todo
-//            //return ok("not admin");
-//        }
+        if(user==null || !user.equals(app.owner)){
+            //todo
+            //return ok("not admin");
+        }
 
         DynamicForm form = play.data.Form.form().bindFromRequest();
         String message = form.data().get("message");
         if(message.length()>300){
-            flash("error_length_modif_message","Trop long");
-            return redirect(routes.Admin.post(appName)  );
+            flash("error_modif_length","Trop long");
+            return redirect(routes.Admin.post(appName));
         }
         if(message!=null){
             app.message=message;
@@ -129,17 +120,18 @@ public class Admin extends Controller{
             }else{
                 Picture.updatePicture(app.backgroundPicture.id,file, background_picture.getContentType());
             }
-            Logger.error("ok");
         }
+
         if (middle_picture != null) {
             File file = middle_picture.getFile();
-            if(app.backgroundPicture==null){
-                app.backgroundPicture=Picture.save(file, middle_picture.getContentType());
+            if(app.middlePicture==null){
+                app.middlePicture=Picture.save(file, middle_picture.getContentType());
             }else{
-                Picture.updatePicture(app.backgroundPicture.id,file, middle_picture.getContentType());
+                Picture.updatePicture(app.middlePicture.id,file, middle_picture.getContentType());
             }
         }
         app.save();
-        return ok();
+        flash("modified","Your page has been modified");
+        return redirect(routes.Admin.post(appName));
     }
 }
