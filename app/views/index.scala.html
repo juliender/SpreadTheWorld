@@ -58,7 +58,7 @@
       </div>
       <!--bottom button -->
       <div class="bottom @if(user!=null){bottom-ok}">
-          @if(user==null || !app.users.contains(user)){
+          @if(user==null || user!=null && app.users.contains(user)){
               <a href="/authenticate/facebook" class="button">Facebook</a>
           }else{
               <a href="#" class="button button-ok">Great job !</a>
