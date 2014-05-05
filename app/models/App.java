@@ -52,7 +52,7 @@ public class App extends Model {
     }
 
     public static App findByName(String appName) {
-        return finder.where().eq("name",appName).findUnique();
+        return finder.where().eq("name",appName.toLowerCase()).findUnique();
     }
 
     public static boolean create(String appName) {
