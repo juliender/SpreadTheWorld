@@ -4,6 +4,7 @@ import _root_.java.util.Date
 import play.api.db._
 import anorm._
 
+import play.api.Play.current
 
 
 import play.api.{Logger, Application}
