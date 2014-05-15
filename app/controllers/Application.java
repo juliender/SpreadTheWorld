@@ -36,6 +36,8 @@ public class Application extends Controller {
 
             if (app.owner == null) {
                 app.owner = user;
+                app.users.add(user);
+
                 app.save();
                 return redirect(routes.Admin.post(appName));
             }
