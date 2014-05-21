@@ -34,7 +34,7 @@ body {
 .top .left { display:inline; width:60%;  }
 .top .right { float:right; width:42%; padding:0;}
 h1 { font-weight:700; text-transform:uppercase; font-size:41px; text-align:left; color:#015D88; font-family: 'Source Sans Pro', sans-serif; padding:0 2% 3% 2%; float:left; width:96%;line-height: 36px;margin-bottom: 10px;}
-.top .right p { font-size:16px; color:#585858; margin:0 0 20px 0; padding:0px; line-height:19px; font-family: 'Source Sans Pro', sans-serif;}
+.top .right p { font-size:20px; color:#585858; margin:0 0 20px 0; padding:0px; line-height:22px; font-family: 'Source Sans Pro', sans-serif;}
 .top .right p span { font-weight:bold;}
 .top .right a{color:#026391; text-decoration:underline;}
 

@@ -15,7 +15,7 @@ public class Application extends Controller {
 
     public static Result index() {
         //TODO belle home page
-        return ok("home page");
+        return ok(views.html.homePage.render());
     }
 
     public static Result appPage(String appName) {

@@ -1,7 +1,7 @@
 1000:com.github.ndeverge.autoping.Autoping
 1500:com.typesafe.plugin.CommonsMailerPlugin
 
-5000:com.github.mumoshu.play2.memcached.MemcachedPlugin
+#5000:com.github.mumoshu.play2.memcached.MemcachedPlugin
 
 9994:service.PgSqlAuthenticatorStore
 9995:securesocial.core.DefaultIdGenerator
